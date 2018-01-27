@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- define angular app -->
+<html ng-app="greedyGameApp">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="main.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+<body>
+<!-- define angular controller -->
+<div ng-controller="mainController">
+ 
+    <div class="container">
+        <form class="form-inline" name="dateForm" ng-submit="submitForm(dateForm.$valid)" novalidate>
+            <div class="form-group">
+                <label>From:<span class="mandatory">*</span></label>
+                <div class="input-group">
+                    <input 
+                        placeholder="YYYY-MM-DD" 
+                        type="text" class="form-control" 
+                        ng-model="fromDate" 
+                        datepicker-options="dateOptions" 
+                        show-button-bar="false" 
+                        datepicker-popup="yyyy-MM-dd" 
+                        is-open="isOpen" 
+                        ng-change="dateChangeHandler()" required/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="fromDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>To:<span class="mandatory">*</span></label>
+                <div class="input-group">
+                    <input 
+                        placeholder="YYYY-MM-DD" 
+                        type="text" class="form-control" 
+                        ng-model="toDate" 
+                        datepicker-options="dateOptions" 
+                        show-button-bar="false" 
+                        datepicker-popup="yyyy-MM-dd" 
+                        is-open="isToOpen"
+                        min-date="minDate" 
+                        max-date="'2100-12-31'" required/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="toDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-disabled="dateForm.$invalid">Submit</button>
+        </form>
+        <div class="table-responsive tab-container">          
+                <table  ng-if="response" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>AdRequest</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="record in response">
+                      <td>{{record.date}}</td>
+                      <td>{{record.adrequest}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4 style="text-align:center;" ng-if="!response">{{noData}}</h4>
+                </div>
+    </div>
+</div>
+
+</body>
+</html>
