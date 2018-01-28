@@ -2,7 +2,15 @@
   "name": "myapp",
   "description": "a really cool app",
   "version": "1.0.0",
+  "main": "main.js",
   "engines": {
     "node": "8.9.3"
+  },
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "ejs": "~1.0.0",
+    "express": "~4.9.8"
   }
 }
